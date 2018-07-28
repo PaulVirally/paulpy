@@ -6,6 +6,22 @@ import numpy as np
 import os
 import pickle
 
+# https://stackoverflow.com/a/9758173/6026013
+def egcd(a, b):
+    if a == 0:
+        return (b, 0, 1)
+    else:
+        g, y, x = egcd(b % a, a)
+        return (g, x - (b // a) * y, y)
+
+# https://stackoverflow.com/a/9758173/6026013
+def modinv(a, m):
+    g, x, y = egcd(a, m)
+    if g != 1:
+        raise Exception('modular inverse does not exist')
+    else:
+        return x % m
+
 # Returns n in base b as a list
 # Taken from http://stackoverflow.com/a/28666223
 def to_base(n, b):
